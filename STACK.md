@@ -1,0 +1,5 @@
+- langchain dartmouth as the ai provider. Python library so we need a fastapi backend
+- supabase is fast and easy to integrate as a database, could give us vector db capabilities for later
+- react router latest stable version
+- tailwind
+- threejs/drei/react-three-fiber for 3d elements and animation

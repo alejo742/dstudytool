@@ -1,0 +1,80 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif,
+    "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  --font-serif: "Fraunces", ui-serif, Georgia, serif;
+  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+
+  --color-ink-50: #f7f7f6;
+  --color-ink-100: #ececea;
+  --color-ink-200: #d7d6d2;
+  --color-ink-300: #b2b0a9;
+  --color-ink-400: #8b887f;
+  --color-ink-500: #6a675e;
+  --color-ink-600: #4f4d47;
+  --color-ink-700: #3a3934;
+  --color-ink-800: #262521;
+  --color-ink-900: #181714;
+  --color-ink-950: #0d0c0a;
+
+  --color-accent-50: #f1f5ff;
+  --color-accent-100: #e0e9ff;
+  --color-accent-200: #c2d4ff;
+  --color-accent-300: #93b2fe;
+  --color-accent-400: #5f88fa;
+  --color-accent-500: #3a63f0;
+  --color-accent-600: #2545d6;
+  --color-accent-700: #1e36ac;
+  --color-accent-800: #1b2e85;
+  --color-accent-900: #1a2a69;
+
+  --color-dartmouth: #00693e;
+  --color-dartmouth-dark: #00502f;
+}
+
+html,
+body {
+  background-color: var(--color-ink-50);
+  color: var(--color-ink-900);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+body {
+  overscroll-behavior-y: none;
+}
+
+::selection {
+  background-color: var(--color-ink-900);
+  color: var(--color-ink-50);
+}
+
+@keyframes fade-up {
+  from { opacity: 0; transform: translate3d(0, 10px, 0); }
+  to   { opacity: 1; transform: translate3d(0, 0, 0); }
+}
+@keyframes fade-in {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+@keyframes shimmer {
+  0%   { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+.animate-fade-up { animation: fade-up 420ms cubic-bezier(0.22, 1, 0.36, 1) both; }
+.animate-fade-in { animation: fade-in 300ms ease-out both; }
+
+.text-balance { text-wrap: balance; }
+.text-pretty  { text-wrap: pretty; }
+
+.focus-ring {
+  outline: 2px solid transparent;
+  outline-offset: 2px;
+}
+.focus-ring:focus-visible {
+  outline-color: var(--color-ink-900);
+}
