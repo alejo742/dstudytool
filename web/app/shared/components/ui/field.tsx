@@ -24,18 +24,18 @@ export function Field({
     <div className={cn("flex flex-col gap-1.5", className)}>
       <label
         htmlFor={id}
-        className="text-xs font-medium text-ink-700 tracking-wide"
+        className="font-head font-semibold text-sm text-ink tracking-wide"
       >
         {label}
-        {required && <span className="text-red-500 ml-0.5">*</span>}
+        {required && <span className="text-red ml-0.5">*</span>}
       </label>
       {children({ id, describedBy: hintId })}
       {(error || hint) && (
         <p
           id={hintId}
           className={cn(
-            "text-xs",
-            error ? "text-red-600" : "text-ink-500",
+            "text-xs font-head",
+            error ? "text-red" : "text-ink3",
           )}
         >
           {error ?? hint}

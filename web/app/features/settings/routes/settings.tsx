@@ -16,15 +16,15 @@ export default function SettingsRoute() {
         description="Signed in as the Dartmouth account below. Add your Dartmouth Chat key to enable generation."
       />
 
-      <div className="mb-8 p-5 rounded-xl border border-ink-200/70 bg-white flex items-center gap-4">
-        <div className="w-10 h-10 rounded-full bg-ink-900 text-ink-50 flex items-center justify-center font-medium">
+      <div className="mb-8 p-5 bg-paper2 border-[1.5px] border-ink flex items-center gap-4">
+        <div className="w-11 h-11 bg-ink text-paper flex items-center justify-center font-head font-bold text-lg">
           {(profile?.full_name ?? profile?.email ?? "?")[0]?.toUpperCase()}
         </div>
         <div className="min-w-0">
-          <p className="text-sm font-medium text-ink-900 truncate">
+          <p className="font-head font-semibold text-ink truncate">
             {profile?.full_name ?? "Dartmouth user"}
           </p>
-          <p className="text-xs text-ink-500 font-mono truncate">
+          <p className="text-xs text-ink3 font-mono truncate">
             {profile?.email}
           </p>
         </div>

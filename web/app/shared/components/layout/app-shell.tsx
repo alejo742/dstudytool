@@ -16,11 +16,11 @@ export function AppShell({ children }: { children: React.ReactNode }) {
 
   return (
     <div className="min-h-screen flex flex-col">
-      <header className="sticky top-0 z-30 border-b border-ink-200/70 bg-ink-50/80 backdrop-blur-md">
-        <div className="max-w-6xl mx-auto px-6 h-14 flex items-center justify-between">
+      <header className="sticky top-0 z-30 border-b border-ink bg-paper2/95 backdrop-blur">
+        <div className="max-w-5xl mx-auto px-6 h-14 flex items-center justify-between">
           <Link
             to="/plans"
-            className="flex items-center gap-2 font-serif text-lg tracking-tight"
+            className="flex items-center gap-2 font-head font-bold text-lg tracking-tight text-ink no-underline"
           >
             <Mark />
             <span>Study tool</span>
@@ -29,18 +29,18 @@ export function AppShell({ children }: { children: React.ReactNode }) {
           <nav className="flex items-center gap-1">
             <NavItem to="/plans" icon={<BookOpen size={14} />} label="Plans" />
             <NavItem to="/settings" icon={<Settings size={14} />} label="Settings" />
-            <div className="w-px h-5 bg-ink-200 mx-2" />
+            <div className="w-px h-5 bg-rule mx-2" />
             <div className="flex items-center gap-2 pr-2">
-              <div className="w-7 h-7 rounded-full bg-ink-900 text-ink-50 text-xs flex items-center justify-center font-medium">
+              <div className="w-7 h-7 bg-ink text-paper text-xs flex items-center justify-center font-head font-semibold">
                 {initials(profile?.full_name || profile?.email || "?")}
               </div>
-              <span className="text-xs text-ink-500 hidden sm:block max-w-[14ch] truncate">
+              <span className="text-xs text-ink3 hidden sm:block max-w-[14ch] truncate font-mono">
                 {profile?.email}
               </span>
             </div>
             <button
               onClick={logout}
-              className="w-8 h-8 inline-flex items-center justify-center rounded-md text-ink-500 hover:text-ink-900 hover:bg-ink-100 transition"
+              className="w-8 h-8 inline-flex items-center justify-center border-[1.5px] border-transparent text-ink3 hover:text-ink hover:bg-hl-wash hover:border-ink transition"
               aria-label="Sign out"
               title="Sign out"
             >
@@ -78,10 +78,10 @@ function NavItem({
       end
       className={({ isActive }) =>
         cn(
-          "px-2.5 h-8 inline-flex items-center gap-1.5 rounded-md text-sm transition",
+          "px-3 h-8 inline-flex items-center gap-1.5 font-head font-semibold text-sm no-underline border-l-[3px] transition",
           isActive
-            ? "text-ink-900 bg-ink-100"
-            : "text-ink-500 hover:text-ink-900 hover:bg-ink-100/60",
+            ? "text-ink bg-hl-wash border-red"
+            : "text-ink2 border-transparent hover:text-ink hover:bg-hl-wash/60",
         )
       }
     >
@@ -93,14 +93,14 @@ function NavItem({
 
 function Mark() {
   return (
-    <span className="relative inline-block w-6 h-6 rounded-md bg-ink-900 text-ink-50 overflow-hidden">
+    <span className="relative inline-block w-6 h-6 bg-ink text-paper overflow-hidden">
       <motion.span
         initial={{ y: 10, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
-        className="absolute inset-0 flex items-center justify-center font-serif text-sm"
+        className="absolute inset-0 flex items-center justify-center font-head font-bold text-sm leading-none"
       >
-        s
+        S
       </motion.span>
     </span>
   );

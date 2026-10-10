@@ -7,10 +7,7 @@ export function Card({
 }: React.HTMLAttributes<HTMLDivElement>) {
   return (
     <div
-      className={cn(
-        "bg-white border border-ink-200/70 rounded-lg",
-        className,
-      )}
+      className={cn("bg-paper2 border-[1.5px] border-ink", className)}
       {...rest}
     >
       {children}
@@ -26,5 +23,5 @@ export function CardSection({
 }
 
 export function CardDivider() {
-  return <div className="h-px bg-ink-200/70" />;
+  return <div className="h-px bg-ink" />;
 }

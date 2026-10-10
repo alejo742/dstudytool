@@ -12,34 +12,32 @@ export function PlanCard({ plan, index }: { plan: Plan; index: number }) {
     >
       <Link
         to={`/plans/${plan.id}`}
-        className="group block bg-white border border-ink-200/70 rounded-lg p-5 hover:border-ink-900 transition"
+        className="group block bg-paper2 border-[1.5px] border-ink p-5 no-underline text-ink hover:shadow-brut-sm hover:-translate-y-[1px] transition-all"
       >
         <div className="flex items-start justify-between gap-4">
-          <div>
+          <div className="min-w-0">
             {plan.course_code && (
-              <p className="text-xs tracking-[0.15em] uppercase text-ink-400 mb-2">
-                {plan.course_code}
-              </p>
+              <p className="eyebrow mb-2">{plan.course_code}</p>
             )}
-            <h3 className="font-serif text-xl text-ink-900 group-hover:text-accent-700 transition">
+            <h3 className="font-head font-bold text-2xl text-ink leading-tight group-hover:text-blue transition">
               {plan.title}
             </h3>
             {plan.description && (
-              <p className="text-sm text-ink-500 mt-1 line-clamp-2 text-pretty">
+              <p className="text-ink2 mt-2 line-clamp-2 text-pretty">
                 {plan.description}
               </p>
             )}
           </div>
           <ArrowGlyph />
         </div>
-        <div className="mt-5 pt-4 border-t border-ink-100 flex items-center gap-5 text-xs text-ink-500">
+        <div className="mt-5 pt-3 border-t border-rule flex items-center gap-5 text-xs text-ink2 font-head font-semibold">
           <Stat icon={<FileText size={12} />} value={plan.upload_count} label="files" />
           <Stat
             icon={<Sparkles size={12} />}
             value={plan.generation_count}
             label="generated"
           />
-          <span className="ml-auto text-ink-400">
+          <span className="ml-auto text-ink3 font-mono text-[11px]">
             {new Date(plan.updated_at).toLocaleDateString(undefined, {
               month: "short",
               day: "numeric",
@@ -63,26 +61,20 @@ function Stat({
   return (
     <span className="inline-flex items-center gap-1.5">
       {icon}
-      <span className="font-medium text-ink-700">{value}</span>
-      <span>{label}</span>
+      <span className="text-ink font-bold">{value}</span>
+      <span className="text-ink3 uppercase tracking-wide">{label}</span>
     </span>
   );
 }
 
 function ArrowGlyph() {
   return (
-    <span className="w-8 h-8 rounded-md border border-ink-200 flex items-center justify-center text-ink-400 group-hover:bg-ink-900 group-hover:text-ink-50 group-hover:border-ink-900 transition">
-      <svg
-        width="12"
-        height="12"
-        viewBox="0 0 24 24"
-        fill="none"
-        aria-hidden
-      >
+    <span className="w-9 h-9 border-[1.5px] border-ink flex items-center justify-center text-ink2 bg-paper group-hover:bg-ink group-hover:text-paper transition shrink-0">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden>
         <path
           d="M5 12h14M13 6l6 6-6 6"
           stroke="currentColor"
-          strokeWidth="2"
+          strokeWidth="2.2"
           strokeLinecap="round"
           strokeLinejoin="round"
         />

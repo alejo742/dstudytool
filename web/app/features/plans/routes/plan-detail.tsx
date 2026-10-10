@@ -10,7 +10,7 @@ import { plansApi } from "~/features/plans/services/plans-api";
 import { UploadsPanel } from "~/features/uploads/components/uploads-panel";
 import type { Plan } from "~/shared/types/domain";
 
-export function meta({ params }: { params: { planId?: string } }) {
+export function meta() {
   return [{ title: `Plan · Study tool` }];
 }
 
@@ -38,7 +38,12 @@ export default function PlanDetailRoute() {
 
   const remove = async () => {
     if (!plan) return;
-    if (!confirm(`Delete "${plan.title}"? This removes all uploads and generated material.`)) return;
+    if (
+      !confirm(
+        `Delete "${plan.title}"? This removes all uploads and generated material.`,
+      )
+    )
+      return;
     setDeleting(true);
     try {
       await plansApi.remove(plan.id);
@@ -54,14 +59,14 @@ export default function PlanDetailRoute() {
     <Page>
       <Link
         to="/plans"
-        className="inline-flex items-center gap-1 text-xs text-ink-500 hover:text-ink-900 transition mb-4"
+        className="inline-flex items-center gap-1 font-head font-semibold text-sm text-ink2 hover:text-ink no-underline mb-4"
       >
-        <ArrowLeft size={12} /> All plans
+        <ArrowLeft size={14} /> All plans
       </Link>
 
       {!plan ? (
         <div className="flex flex-col gap-4">
-          <Skeleton className="h-10 w-80" />
+          <Skeleton className="h-12 w-80" />
           <Skeleton className="h-6 w-96" />
         </div>
       ) : (
@@ -72,7 +77,7 @@ export default function PlanDetailRoute() {
           actions={
             <div className="flex items-center gap-2">
               <Button
-                variant="ghost"
+                variant="danger"
                 size="sm"
                 iconLeft={<Trash2 size={14} />}
                 onClick={remove}
@@ -84,10 +89,8 @@ export default function PlanDetailRoute() {
                 to={canStudy ? `/plans/${plan.id}/study` : "#"}
                 aria-disabled={!canStudy}
                 className={[
-                  "inline-flex items-center gap-2 h-10 px-4 rounded-md text-sm font-medium transition active:scale-[0.98]",
-                  canStudy
-                    ? "bg-ink-900 text-ink-50 hover:bg-ink-800"
-                    : "bg-ink-100 text-ink-400 cursor-not-allowed pointer-events-none",
+                  "btn btn-pri no-underline",
+                  canStudy ? "" : "opacity-45 pointer-events-none",
                 ].join(" ")}
               >
                 <Play size={14} />
@@ -98,10 +101,12 @@ export default function PlanDetailRoute() {
         />
       )}
 
-      <div className="grid lg:grid-cols-[1.5fr_1fr] gap-10">
+      <div className="grid lg:grid-cols-[1.6fr_1fr] gap-10">
         <section>
-          <div className="flex items-center gap-2 mb-4">
-            <h2 className="font-serif text-xl">Materials</h2>
+          <div className="flex items-center gap-3 mb-4">
+            <h2 className="font-head font-bold text-2xl leading-none">
+              Materials
+            </h2>
             {totalCount > 0 && (
               <Badge tone="neutral">
                 {readyCount}/{totalCount} ready
@@ -118,21 +123,23 @@ export default function PlanDetailRoute() {
         </section>
 
         <aside>
-          <h2 className="font-serif text-xl mb-4">About this plan</h2>
-          <div className="bg-white border border-ink-200/70 rounded-lg divide-y divide-ink-100 text-sm">
+          <h2 className="font-head font-bold text-2xl leading-none mb-4">
+            About this plan
+          </h2>
+          <div className="bg-paper2 border-[1.5px] border-ink">
             <Row label="Files uploaded" value={plan?.upload_count ?? 0} />
             <Row label="Chunks extracted" value={plan?.extracted_chunk_count ?? 0} />
             <Row label="Practice generated" value={plan?.generation_count ?? 0} />
           </div>
 
-          <div className="mt-6 p-4 rounded-lg border border-ink-200/70 bg-ink-50 text-sm text-ink-500 text-pretty">
-            <strong className="text-ink-900 block mb-1">
+          <div className="callout callout-blue mt-5">
+            <strong className="font-head block mb-1 text-ink">
               Needs your Dartmouth Chat key
             </strong>
-            Generation uses Dartmouth-hosted models with your personal key.
+            Generation uses Dartmouth-hosted models with your personal key.{" "}
             <Link
               to="/settings"
-              className="inline-block ml-1 text-ink-900 underline underline-offset-2"
+              className="text-blue underline underline-offset-2 font-semibold"
             >
               Add it in settings
             </Link>
@@ -146,9 +153,13 @@ export default function PlanDetailRoute() {
 
 function Row({ label, value }: { label: string; value: number | string }) {
   return (
-    <div className="flex items-center justify-between px-4 py-3">
-      <span className="text-ink-500">{label}</span>
-      <span className="font-medium text-ink-900 font-mono text-xs">{value}</span>
+    <div className="flex items-center justify-between px-4 py-3 border-b border-rule last:border-b-0">
+      <span className="font-head font-semibold text-ink2 uppercase tracking-wide text-xs">
+        {label}
+      </span>
+      <span className="font-mono text-sm text-ink font-semibold tabular-nums">
+        {value}
+      </span>
     </div>
   );
 }

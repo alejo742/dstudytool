@@ -52,7 +52,7 @@ export function Dialog({
           transition={{ duration: 0.18 }}
         >
           <motion.div
-            className="absolute inset-0 bg-ink-900/40 backdrop-blur-sm"
+            className="absolute inset-0 bg-ink/50 backdrop-blur-sm"
             onClick={onClose}
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
@@ -63,7 +63,7 @@ export function Dialog({
             aria-modal="true"
             aria-label={title}
             className={cn(
-              "relative w-full bg-white rounded-xl shadow-xl border border-ink-200",
+              "relative w-full bg-paper2 border-[1.5px] border-ink shadow-brut",
               widths[width],
               className,
             )}
@@ -74,20 +74,20 @@ export function Dialog({
           >
             <button
               onClick={onClose}
-              className="absolute top-3 right-3 w-8 h-8 inline-flex items-center justify-center rounded-md text-ink-500 hover:text-ink-900 hover:bg-ink-100 transition"
+              className="absolute top-3 right-3 w-8 h-8 inline-flex items-center justify-center border-[1.5px] border-transparent text-ink2 hover:text-ink hover:border-ink hover:bg-hl-wash transition"
               aria-label="Close"
             >
               <X size={16} />
             </button>
             {(title || description) && (
-              <div className="px-6 pt-6 pb-4 border-b border-ink-100">
+              <div className="px-6 pt-6 pb-4 border-b border-ink">
                 {title && (
-                  <h2 className="font-serif text-2xl text-ink-900">{title}</h2>
+                  <h2 className="font-head font-bold text-2xl text-ink leading-none">
+                    {title}
+                  </h2>
                 )}
                 {description && (
-                  <p className="text-sm text-ink-500 mt-1 text-pretty">
-                    {description}
-                  </p>
+                  <p className="text-ink2 mt-2 text-pretty">{description}</p>
                 )}
               </div>
             )}

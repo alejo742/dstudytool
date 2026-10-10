@@ -7,7 +7,6 @@
 -- Extensions
 -- --------------------------------------------------------------------------
 create extension if not exists "pgcrypto";
-create extension if not exists "uuid-ossp";
 
 -- --------------------------------------------------------------------------
 -- Helper: auto-updated updated_at
@@ -26,7 +25,7 @@ $$;
 -- Plans
 -- --------------------------------------------------------------------------
 create table if not exists public.plans (
-  id uuid primary key default uuid_generate_v4(),
+  id uuid primary key default gen_random_uuid(),
   user_id uuid not null references auth.users(id) on delete cascade,
   title text not null,
   course_code text,
@@ -52,7 +51,7 @@ create policy plans_owner_all on public.plans
 -- Uploads
 -- --------------------------------------------------------------------------
 create table if not exists public.uploads (
-  id uuid primary key default uuid_generate_v4(),
+  id uuid primary key default gen_random_uuid(),
   user_id uuid not null references auth.users(id) on delete cascade,
   plan_id uuid not null references public.plans(id) on delete cascade,
   filename text not null,
@@ -85,7 +84,7 @@ create policy uploads_owner_all on public.uploads
 -- Extracted chunks
 -- --------------------------------------------------------------------------
 create table if not exists public.extracted_chunks (
-  id uuid primary key default uuid_generate_v4(),
+  id uuid primary key default gen_random_uuid(),
   user_id uuid not null references auth.users(id) on delete cascade,
   plan_id uuid not null references public.plans(id) on delete cascade,
   upload_id uuid not null references public.uploads(id) on delete cascade,
@@ -109,7 +108,7 @@ create policy extracted_chunks_owner_all on public.extracted_chunks
 -- Generations
 -- --------------------------------------------------------------------------
 create table if not exists public.generations (
-  id uuid primary key default uuid_generate_v4(),
+  id uuid primary key default gen_random_uuid(),
   user_id uuid not null references auth.users(id) on delete cascade,
   plan_id uuid not null references public.plans(id) on delete cascade,
   kind text not null,

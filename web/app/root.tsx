@@ -21,7 +21,7 @@ export const links: Route.LinksFunction = () => [
   },
   {
     rel: "stylesheet",
-    href: "https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Fraunces:ital,opsz,wght@0,9..144,300..700;1,9..144,300..700&family=JetBrains+Mono:wght@400;500&display=swap",
+    href: "https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=Caveat:wght@500;600&family=JetBrains+Mono:wght@400;500&family=Source+Serif+4:ital,wght@0,400;0,600;0,700;1,400;1,600&display=swap",
   },
 ];
 
@@ -31,13 +31,15 @@ export function Layout({ children }: { children: React.ReactNode }) {
       <head>
         <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <meta name="theme-color" content="#f7f7f6" />
+        <meta name="theme-color" content="#EDF2E6" />
+        <link rel="icon" href="/favicon.ico" sizes="any" />
+        <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
         <Meta />
         <Links />
       </head>
-      <body className="min-h-full antialiased">
+      <body className="min-h-full antialiased bg-paper text-ink">
         {children}
-        <Toaster position="bottom-right" theme="light" richColors closeButton />
+        <Toaster position="bottom-right" theme="light" closeButton />
         <ScrollRestoration />
         <Scripts />
       </body>
@@ -50,6 +52,19 @@ export default function App() {
     <AuthProvider>
       <Outlet />
     </AuthProvider>
+  );
+}
+
+export function HydrateFallback() {
+  return (
+    <main className="min-h-screen flex items-center justify-center bg-grid">
+      <div className="flex flex-col items-center gap-4">
+        <div className="w-7 h-7 border-2 border-rule border-t-ink animate-spin" />
+        <p className="font-head font-semibold text-sm tracking-[0.2em] uppercase text-ink3">
+          Study tool
+        </p>
+      </div>
+    </main>
   );
 }
 
@@ -70,21 +85,21 @@ export function ErrorBoundary({ error }: Route.ErrorBoundaryProps) {
   }
 
   return (
-    <main className="min-h-screen flex items-center justify-center px-6">
-      <div className="max-w-md text-center animate-fade-up">
-        <p className="text-xs tracking-[0.2em] uppercase text-ink-400 mb-4">
+    <main className="min-h-screen flex items-center justify-center px-6 bg-grid">
+      <div className="max-w-md text-center bg-paper2 border-[1.5px] border-ink p-8 shadow-brut">
+        <p className="font-head text-sm tracking-[0.2em] uppercase text-ink3 mb-3">
           Study tool
         </p>
-        <h1 className="font-serif text-5xl mb-4">{message}</h1>
-        <p className="text-ink-500 text-pretty mb-8">{details}</p>
+        <h1 className="font-head font-bold text-5xl leading-none mb-4">{message}</h1>
+        <p className="text-ink2 mb-8">{details}</p>
         <a
           href="/"
-          className="inline-flex items-center gap-2 text-sm font-medium border-b border-ink-900 pb-0.5 hover:text-ink-600 hover:border-ink-600 transition"
+          className="btn btn-pri"
         >
           Return home
         </a>
         {stack && (
-          <pre className="mt-10 text-left w-full p-4 overflow-x-auto bg-ink-900 text-ink-50 rounded text-xs">
+          <pre className="mt-10 text-left w-full p-4 overflow-x-auto bg-code text-code-fg font-mono text-xs">
             <code>{stack}</code>
           </pre>
         )}

@@ -67,9 +67,11 @@ export function CreatePlanInline({ onCreated }: { onCreated: (p: Plan) => void }
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: -2, scale: 0.98 }}
             transition={{ duration: 0.22, ease: [0.22, 1, 0.36, 1] }}
-            className="w-[min(32rem,90vw)] bg-white border border-ink-200 rounded-lg shadow-xl p-5"
+            className="w-[min(32rem,90vw)] bg-paper2 border-[1.5px] border-ink shadow-brut p-5"
           >
-            <h3 className="font-serif text-xl mb-4">New study plan</h3>
+            <h3 className="font-head font-bold text-2xl mb-4 leading-none">
+              New study plan
+            </h3>
             <div className="flex gap-3">
               <Field label="Title" required className="flex-1">
                 {({ id }) => (
@@ -82,7 +84,7 @@ export function CreatePlanInline({ onCreated }: { onCreated: (p: Plan) => void }
                   />
                 )}
               </Field>
-              <Field label="Course code" className="w-28">
+              <Field label="Course code" className="w-32">
                 {({ id }) => (
                   <Input
                     id={id}

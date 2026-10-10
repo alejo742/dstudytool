@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Study tool — style guide</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=Caveat:wght@500;600&family=JetBrains+Mono:wght@400;500&family=Source+Serif+4:ital,wght@0,400;0,600;0,700;1,400;1,600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#EDF2E6; --paper2:#F7FAF2; --ink:#14213D; --ink2:#3A485E; --ink3:#66738A;
+  --rule:#C7D5BA; --gridc:rgba(120,160,100,.22);
+  --blue:#1F4FD1; --blue-wash:#DDE6FB;
+  --red:#C23A2F; --red-wash:#F7DDD9;
+  --hl:#FFD83D; --hl-wash:#FFF1B0;
+  --green:#1C7F47; --green-wash:#D6EEDD;
+  --code:#14213D; --code-fg:#E9EEF6;
+  --head:"Barlow Condensed","Arial Narrow",Arial,sans-serif;
+  --body:"Source Serif 4",Charter,Georgia,serif;
+  --hand:"Caveat",cursive;
+  --mono:"JetBrains Mono",Menlo,monospace;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--paper);color:var(--ink);font:16px/1.62 var(--body);-webkit-font-smoothing:antialiased}
+h1,h2,h3,h4{font-family:var(--head);color:var(--ink);letter-spacing:-.2px;margin:0}
+code{font-family:var(--mono);font-size:.86em;background:var(--hl-wash);padding:.04em .32em;border-radius:2px}
+a{color:var(--blue)}
+.wrap{max-width:1040px;margin:0 auto;padding:0 24px}
+.bg-grid{background-color:var(--paper2);background-image:linear-gradient(var(--gridc) 1px,transparent 1px),linear-gradient(90deg,var(--gridc) 1px,transparent 1px);background-size:24px 24px}
+
+/* Top bar */
+.topbar{border-bottom:1.5px solid var(--ink);background:var(--paper2)}
+.topbar .wrap{height:56px;display:flex;align-items:center;justify-content:space-between}
+.brand{font:700 20px var(--head);text-decoration:none;color:var(--ink);display:flex;align-items:center;gap:10px}
+.brand .mk{width:24px;height:24px;background:var(--ink);color:var(--paper);display:inline-flex;align-items:center;justify-content:center;font:700 15px var(--head);line-height:1}
+.topbar nav{display:flex;align-items:center;gap:4px}
+.navlink{font:600 14px var(--head);text-decoration:none;color:var(--ink2);padding:6px 12px;border-left:3px solid transparent}
+.navlink.on{color:var(--ink);background:var(--hl-wash);border-left-color:var(--red)}
+.navlink:hover{color:var(--ink);background:var(--hl-wash)}
+
+/* Section */
+section.sg{padding:40px 0;border-bottom:1px dashed var(--rule)}
+section.sg:last-child{border-bottom:0}
+.eyebrow{font:600 13px var(--head);letter-spacing:.22em;text-transform:uppercase;color:var(--ink3);margin:0 0 6px}
+h1.display{font:700 clamp(2.6rem,6vw,4.4rem)/.95 var(--head);letter-spacing:-.4px;margin:0 0 10px}
+h2.display{font:700 clamp(2rem,4vw,2.6rem)/1 var(--head);margin:0 0 10px}
+h3.sub{font:700 1.5rem var(--head);margin:0 0 8px}
+.lede{font-size:1.1rem;color:var(--ink2);max-width:56ch;margin:0 0 6px}
+.hand{font-family:var(--hand);color:var(--blue);font-size:1.25rem}
+.rule-h{border:0;border-top:1.5px solid var(--ink);margin:14px 0 0}
+
+.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+.grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+@media(max-width:800px){.grid-2,.grid-3{grid-template-columns:1fr}}
+
+/* Hero */
+.hero{border-bottom:1.5px solid var(--ink);padding:56px 0}
+.hero .inner{display:grid;grid-template-columns:1.2fr 1fr;gap:40px;align-items:center}
+.hero .art{height:420px;border:1.5px solid var(--ink);background:var(--paper2);box-shadow:5px 5px 0 var(--ink);position:relative;overflow:hidden}
+.hero .art svg{position:absolute;inset:0;width:100%;height:100%}
+@media(max-width:800px){.hero .inner{grid-template-columns:1fr}.hero .art{height:260px}}
+
+/* Buttons */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;font:600 1rem var(--head);letter-spacing:.2px;background:var(--paper2);color:var(--ink);border:1.5px solid var(--ink);padding:6px 14px;border-radius:2px;cursor:pointer;text-decoration:none;line-height:1.1;transition:background 120ms, color 120ms, transform 120ms}
+.btn:hover{background:var(--hl-wash)}
+.btn:active{transform:translate(1px,1px)}
+.btn-pri{background:var(--ink);color:var(--paper)}
+.btn-pri:hover{background:var(--blue);border-color:var(--blue);color:#fff}
+.btn-danger{color:var(--red);border-color:var(--red)}
+.btn-danger:hover{background:var(--red-wash)}
+.btn-ghost{background:transparent;border-color:transparent}
+.btn-ghost:hover{background:var(--hl-wash);border-color:var(--ink)}
+.btn-sm{padding:3px 10px;font-size:.92rem}
+.btn-lg{padding:9px 20px;font-size:1.08rem}
+
+/* Inputs */
+.field{display:flex;flex-direction:column;gap:6px;max-width:360px}
+.field label{font:600 14px var(--head);color:var(--ink);letter-spacing:.02em}
+.input{width:100%;font:500 1rem var(--head);padding:6px 10px;border:1.5px solid var(--ink);background:var(--paper2);color:var(--ink);border-radius:2px;line-height:1.4}
+.input::placeholder{color:var(--ink3)}
+.input:focus{outline:none;box-shadow:0 0 0 3px rgba(31,79,209,.2)}
+.hint{font:500 12px var(--head);color:var(--ink3)}
+.hint.err{color:var(--red)}
+
+/* Badges */
+.badge{display:inline-flex;align-items:center;gap:4px;padding:1px 7px;height:20px;font:600 11px var(--head);letter-spacing:.04em;text-transform:uppercase;border:1px solid currentColor}
+.badge .dot{width:6px;height:6px;background:currentColor}
+.b-neutral{color:var(--ink);background:var(--paper)}
+.b-blue{color:var(--blue);background:var(--blue-wash)}
+.b-red{color:var(--red);background:var(--red-wash)}
+.b-green{color:var(--green);background:var(--green-wash)}
+.b-yellow{color:var(--ink);background:var(--hl-wash);border-color:var(--hl)}
+
+/* Callouts */
+.callout{padding:12px 16px;margin:10px 0;max-width:72ch;background:var(--paper2)}
+.callout b:first-child{font-family:var(--head);font-size:1.05rem;margin-right:.3em}
+.callout-hl{background:var(--hl-wash);border-left:5px solid var(--hl)}
+.callout-blue{background:var(--blue-wash);border-left:5px solid var(--blue)}
+.callout-red{background:var(--red-wash);border-left:5px solid var(--red)}
+.callout-green{background:var(--green-wash);border-left:5px solid var(--green)}
+
+/* Card (plan card) */
+.card{display:block;background:var(--paper2);border:1.5px solid var(--ink);padding:18px;text-decoration:none;color:var(--ink);transition:transform 120ms, box-shadow 120ms}
+.card:hover{box-shadow:3px 3px 0 var(--ink);transform:translate(-1px,-1px)}
+.card .meta{font:600 12px var(--head);letter-spacing:.18em;text-transform:uppercase;color:var(--ink3);margin:0 0 6px}
+.card h3{font:700 1.4rem var(--head);margin:0 0 6px}
+.card p{color:var(--ink2);margin:0 0 14px}
+.card .stats{display:flex;align-items:center;gap:18px;padding-top:12px;border-top:1px solid var(--rule);font:600 12px var(--head);color:var(--ink2)}
+.card .stats .n{color:var(--ink);font-weight:700;margin-right:4px}
+.card .stats .spacer{margin-left:auto;font-family:var(--mono);font-weight:500;font-size:11px;color:var(--ink3)}
+
+/* Frame (figure) */
+.frame{border:1.5px solid var(--ink);background:var(--paper2)}
+.frame-head{padding:7px 16px;border-bottom:1.5px solid var(--ink);background:var(--paper);font:600 1.08rem var(--head)}
+.frame-body{padding:16px}
+.frame-foot{padding:8px 16px;border-top:1.5px solid var(--ink);background:var(--paper);font-size:.9rem;color:var(--ink2)}
+
+/* List (uploads) */
+.list{background:var(--paper2);border:1.5px solid var(--ink)}
+.list-row{display:flex;align-items:center;gap:12px;padding:10px 14px;border-bottom:1px solid var(--rule)}
+.list-row:last-child{border-bottom:0}
+.list-row .ic{width:36px;height:36px;background:var(--paper);border:1px solid var(--rule);display:inline-flex;align-items:center;justify-content:center;color:var(--ink2);font:600 13px var(--head)}
+.list-row .nm{font-weight:600;color:var(--ink)}
+.list-row .sub{font-family:var(--mono);font-size:11px;color:var(--ink3);margin-top:2px}
+.list-row .right{margin-left:auto;display:flex;gap:6px}
+
+/* Side-by-side info grid (About this plan) */
+.rows{background:var(--paper2);border:1.5px solid var(--ink)}
+.rows .r{display:flex;justify-content:space-between;align-items:center;padding:10px 14px;border-bottom:1px solid var(--rule)}
+.rows .r:last-child{border-bottom:0}
+.rows .r .k{font:600 12px var(--head);text-transform:uppercase;letter-spacing:.1em;color:var(--ink2)}
+.rows .r .v{font-family:var(--mono);font-weight:600;color:var(--ink)}
+
+/* Table */
+table.t{border-collapse:collapse;width:100%;font-size:.95rem}
+table.t th,table.t td{border-bottom:1px solid var(--rule);padding:7px 10px;text-align:left}
+table.t th{font:600 1.02rem var(--head);border-bottom:2px solid var(--ink)}
+table.t tr.hi td{background:var(--hl-wash)}
+
+/* Swatches */
+.swatches{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:10px}
+.sw{border:1.5px solid var(--ink);background:var(--paper2)}
+.sw .cap{display:flex;justify-content:space-between;padding:6px 10px;font:600 12px var(--head);border-top:1.5px solid var(--ink);background:var(--paper)}
+.sw .cap code{background:transparent;color:var(--ink2);padding:0}
+.sw .block{height:60px}
+
+/* Dropzone */
+.dropzone{border:1.5px dashed var(--ink);padding:34px;text-align:center;background-color:var(--paper2);background-image:linear-gradient(var(--gridc) 1px,transparent 1px),linear-gradient(90deg,var(--gridc) 1px,transparent 1px);background-size:20px 20px}
+.dropzone .ic{width:48px;height:48px;background:var(--paper2);border:1.5px solid var(--ink);display:inline-flex;align-items:center;justify-content:center;margin:0 auto 12px}
+.dropzone h4{font:700 1.4rem var(--head);margin:0}
+.dropzone p{color:var(--ink2);margin:4px 0 14px}
+
+/* Toolbar / segmented */
+.seg{display:inline-flex;border:1.5px solid var(--ink)}
+.seg button{font:600 .95rem var(--head);padding:5px 12px;background:var(--paper2);color:var(--ink2);border:0;border-right:1px solid var(--ink);cursor:pointer}
+.seg button:last-child{border-right:0}
+.seg button.on{background:var(--ink);color:var(--paper)}
+.seg button:not(.on):hover{background:var(--hl-wash);color:var(--ink)}
+
+/* Empty state */
+.empty{border:1.5px dashed var(--ink);background:var(--paper2);padding:36px;text-align:center}
+.empty .ic{width:48px;height:48px;border:1.5px solid var(--ink);display:inline-flex;align-items:center;justify-content:center;background:var(--paper);margin-bottom:12px}
+.empty h4{font:700 1.5rem var(--head);margin:0 0 4px}
+.empty p{color:var(--ink2);max-width:36ch;margin:0 auto 14px}
+
+footer{padding:30px 0 50px;font:500 13px var(--head);color:var(--ink3)}
+</style>
+</head>
+<body>
+
+<!-- Topbar -->
+<header class="topbar">
+  <div class="wrap">
+    <a class="brand" href="#"><span class="mk">S</span>Study tool</a>
+    <nav>
+      <a class="navlink on" href="#">Plans</a>
+      <a class="navlink" href="#">Settings</a>
+      <span style="width:1px;height:20px;background:var(--rule);margin:0 8px"></span>
+      <span style="display:inline-flex;align-items:center;gap:8px">
+        <span style="width:28px;height:28px;background:var(--ink);color:var(--paper);display:inline-flex;align-items:center;justify-content:center;font:700 12px var(--head)">AM</span>
+        <span style="font-family:var(--mono);font-size:12px;color:var(--ink3)">alejo@dartmouth.edu</span>
+      </span>
+    </nav>
+  </div>
+</header>
+
+<!-- Hero -->
+<section class="hero bg-grid">
+  <div class="wrap inner">
+    <div>
+      <p class="eyebrow">Dartmouth only · bring your own key</p>
+      <h1 class="display">Practice material made from your course.</h1>
+      <p class="lede">Upload the slides, syllabus, and problem sets you already have. Study from an unlimited stream of practice problems grounded in that exact material.</p>
+      <div style="margin-top:22px;display:flex;gap:10px;flex-wrap:wrap">
+        <a class="btn btn-pri btn-lg" href="#">Get started →</a>
+        <a class="btn btn-lg" href="#">Learn more</a>
+      </div>
+      <p class="hand" style="margin-top:16px">one plan per course — one source of truth</p>
+    </div>
+    <div class="art" aria-hidden="true">
+      <svg viewBox="0 0 400 420" preserveAspectRatio="xMidYMid slice">
+        <defs>
+          <pattern id="g" width="20" height="20" patternUnits="userSpaceOnUse">
+            <path d="M20 0H0V20" fill="none" stroke="rgba(120,160,100,.35)" stroke-width="1"/>
+          </pattern>
+        </defs>
+        <rect width="400" height="420" fill="url(#g)"/>
+        <circle cx="200" cy="210" r="110" fill="none" stroke="#14213D" stroke-width="1.5"/>
+        <circle cx="200" cy="210" r="70" fill="none" stroke="#1F4FD1" stroke-width="1.5"/>
+        <circle cx="200" cy="210" r="30" fill="#FFD83D" stroke="#14213D" stroke-width="1.5"/>
+        <circle cx="305" cy="210" r="7" fill="#C23A2F" stroke="#14213D" stroke-width="1.2"/>
+        <circle cx="200" cy="100" r="5" fill="#1C7F47" stroke="#14213D" stroke-width="1.2"/>
+        <circle cx="135" cy="275" r="4" fill="#1F4FD1" stroke="#14213D" stroke-width="1.2"/>
+        <text x="20" y="40" font-family="Barlow Condensed" font-weight="700" font-size="18" fill="#14213D">plan → materials → practice</text>
+        <text x="20" y="400" font-family="Caveat" font-size="22" fill="#1F4FD1">grounded orbit</text>
+      </svg>
+    </div>
+  </div>
+</section>
+
+<div class="wrap">
+
+<!-- Typography -->
+<section class="sg">
+  <p class="eyebrow">01 — Typography</p>
+  <h2 class="display">Headings, body, hand.</h2>
+  <hr class="rule-h">
+  <div class="grid-2" style="margin-top:20px">
+    <div>
+      <h1 class="display" style="font-size:3.2rem">Display · Barlow Condensed 700</h1>
+      <h3 class="sub">Section heading · Barlow 700</h3>
+      <h4 style="font:600 1.15rem var(--head);margin:14px 0 4px">Subsection · Barlow 600</h4>
+      <p class="eyebrow" style="margin-top:14px">eyebrow label</p>
+      <p class="hand">Caveat — margin notes, asides, little voice.</p>
+    </div>
+    <div>
+      <p>Body is Source Serif 4 at 16px / 1.62. Max width around 70ch keeps a line comfortable. Use <code>code</code> for identifiers.</p>
+      <p>Second paragraph for rhythm. The paper color shows through everywhere — <code>#EDF2E6</code> for the main surface, <code>#F7FAF2</code> for raised panels.</p>
+      <p style="font-family:var(--mono);font-size:.86rem;color:var(--ink2)">Mono · JetBrains · for emails, IDs, byte counts.</p>
+    </div>
+  </div>
+</section>
+
+<!-- Color -->
+<section class="sg">
+  <p class="eyebrow">02 — Color</p>
+  <h2 class="display">Palette.</h2>
+  <hr class="rule-h">
+  <div class="swatches" style="margin-top:20px">
+    <div class="sw"><div class="block" style="background:#EDF2E6"></div><div class="cap">paper <code>#EDF2E6</code></div></div>
+    <div class="sw"><div class="block" style="background:#F7FAF2"></div><div class="cap">paper2 <code>#F7FAF2</code></div></div>
+    <div class="sw"><div class="block" style="background:#14213D"></div><div class="cap" style="color:var(--ink)">ink <code>#14213D</code></div></div>
+    <div class="sw"><div class="block" style="background:#3A485E"></div><div class="cap">ink2 <code>#3A485E</code></div></div>
+    <div class="sw"><div class="block" style="background:#66738A"></div><div class="cap">ink3 <code>#66738A</code></div></div>
+    <div class="sw"><div class="block" style="background:#C7D5BA"></div><div class="cap">rule <code>#C7D5BA</code></div></div>
+    <div class="sw"><div class="block" style="background:#1F4FD1"></div><div class="cap">blue <code>#1F4FD1</code></div></div>
+    <div class="sw"><div class="block" style="background:#DDE6FB"></div><div class="cap">blue-wash</div></div>
+    <div class="sw"><div class="block" style="background:#C23A2F"></div><div class="cap">red <code>#C23A2F</code></div></div>
+    <div class="sw"><div class="block" style="background:#F7DDD9"></div><div class="cap">red-wash</div></div>
+    <div class="sw"><div class="block" style="background:#FFD83D"></div><div class="cap">hl <code>#FFD83D</code></div></div>
+    <div class="sw"><div class="block" style="background:#FFF1B0"></div><div class="cap">hl-wash</div></div>
+    <div class="sw"><div class="block" style="background:#1C7F47"></div><div class="cap">green <code>#1C7F47</code></div></div>
+    <div class="sw"><div class="block" style="background:#D6EEDD"></div><div class="cap">green-wash</div></div>
+  </div>
+</section>
+
+<!-- Buttons -->
+<section class="sg">
+  <p class="eyebrow">03 — Buttons</p>
+  <h2 class="display">Flat, hard border, 2px corners.</h2>
+  <hr class="rule-h">
+  <div style="margin-top:18px;display:flex;flex-wrap:wrap;gap:10px;align-items:center">
+    <button class="btn btn-pri">Primary</button>
+    <button class="btn">Secondary</button>
+    <button class="btn btn-ghost">Ghost</button>
+    <button class="btn btn-danger">Danger</button>
+    <button class="btn" disabled style="opacity:.45;cursor:not-allowed">Disabled</button>
+  </div>
+  <div style="margin-top:12px;display:flex;flex-wrap:wrap;gap:10px;align-items:center">
+    <button class="btn btn-pri btn-sm">Small</button>
+    <button class="btn btn-sm">Small</button>
+    <button class="btn btn-pri btn-lg">Large call-to-action →</button>
+  </div>
+</section>
+
+<!-- Inputs -->
+<section class="sg">
+  <p class="eyebrow">04 — Form fields</p>
+  <h2 class="display">Inputs & labels.</h2>
+  <hr class="rule-h">
+  <div class="grid-2" style="margin-top:18px">
+    <div class="field">
+      <label for="e1">Title <span style="color:var(--red)">*</span></label>
+      <input id="e1" class="input" placeholder="e.g. Multivariable Calculus">
+      <span class="hint">Shown on the plan card.</span>
+    </div>
+    <div class="field">
+      <label for="e2">Course code</label>
+      <input id="e2" class="input" value="MATH 13">
+      <span class="hint err">Must be fewer than 12 characters.</span>
+    </div>
+  </div>
+</section>
+
+<!-- Badges -->
+<section class="sg">
+  <p class="eyebrow">05 — Badges & status</p>
+  <h2 class="display">Status chips.</h2>
+  <hr class="rule-h">
+  <div style="margin-top:18px;display:flex;gap:8px;flex-wrap:wrap">
+    <span class="badge b-neutral"><span class="dot"></span>Pending</span>
+    <span class="badge b-blue"><span class="dot"></span>Extracting</span>
+    <span class="badge b-green"><span class="dot"></span>Ready</span>
+    <span class="badge b-red"><span class="dot"></span>Failed</span>
+    <span class="badge b-yellow"><span class="dot"></span>Unverified</span>
+  </div>
+</section>
+
+<!-- Callouts -->
+<section class="sg">
+  <p class="eyebrow">06 — Callouts</p>
+  <h2 class="display">Rail-left panels.</h2>
+  <hr class="rule-h">
+  <div class="callout callout-hl"><b>Rule.</b> Yellow callouts carry the important thing to remember.</div>
+  <div class="callout callout-blue"><b>Note.</b> Blue callouts carry definitions and references.</div>
+  <div class="callout callout-red"><b>Trap.</b> Red callouts carry errors and footguns.</div>
+  <div class="callout callout-green"><b>Done.</b> Green callouts carry success and confirmations.</div>
+</section>
+
+<!-- Cards -->
+<section class="sg">
+  <p class="eyebrow">07 — Plan cards</p>
+  <h2 class="display">Grid of courses.</h2>
+  <hr class="rule-h">
+  <div class="grid-2" style="margin-top:18px">
+    <a class="card" href="#">
+      <p class="meta">MATH 13</p>
+      <h3>Multivariable Calculus</h3>
+      <p>Vectors, partials, double and triple integrals, line and surface integrals.</p>
+      <div class="stats">
+        <span><span class="n">12</span>files</span>
+        <span><span class="n">34</span>generated</span>
+        <span class="spacer">Oct 9</span>
+      </div>
+    </a>
+    <a class="card" href="#">
+      <p class="meta">COSC 50</p>
+      <h3>Software Design & Implementation</h3>
+      <p>Design patterns, testing, build systems and the C/C++ side of a working stack.</p>
+      <div class="stats">
+        <span><span class="n">8</span>files</span>
+        <span><span class="n">11</span>generated</span>
+        <span class="spacer">Oct 7</span>
+      </div>
+    </a>
+  </div>
+</section>
+
+<!-- Frames + Rows -->
+<section class="sg">
+  <p class="eyebrow">08 — Frames & info rows</p>
+  <h2 class="display">Hard-bordered containers.</h2>
+  <hr class="rule-h">
+  <div class="grid-2" style="margin-top:18px">
+    <div class="frame">
+      <div class="frame-head">About this plan</div>
+      <div class="rows" style="border:0">
+        <div class="r"><span class="k">Files uploaded</span><span class="v">12</span></div>
+        <div class="r"><span class="k">Chunks extracted</span><span class="v">1,284</span></div>
+        <div class="r"><span class="k">Practice generated</span><span class="v">34</span></div>
+      </div>
+      <div class="frame-foot">Updated 2m ago.</div>
+    </div>
+    <div class="frame">
+      <div class="frame-head">Generation · problem</div>
+      <div class="frame-body">
+        <p style="margin-top:0">A particle moves along the curve <code>r(t) = (cos t, sin t, t)</code>. Find the arc length between <code>t = 0</code> and <code>t = 2π</code>.</p>
+        <p class="hand">Think unit-speed first — this one is clean.</p>
+      </div>
+      <div class="frame-foot">Grounded in <code>lecture-07.pdf</code> · <code>problem-set-3.pdf</code></div>
+    </div>
+  </div>
+</section>
+
+<!-- Uploads list -->
+<section class="sg">
+  <p class="eyebrow">09 — Uploads list</p>
+  <h2 class="display">Rows with icon, status, meta.</h2>
+  <hr class="rule-h">
+  <div class="list" style="margin-top:18px">
+    <div class="list-row">
+      <span class="ic">PDF</span>
+      <div>
+        <div class="nm">lecture-07-arc-length.pdf</div>
+        <div class="sub">2.1 MB · 24 pages · 48,210 chars</div>
+      </div>
+      <div class="right">
+        <span class="badge b-green"><span class="dot"></span>Ready</span>
+        <button class="btn btn-sm btn-ghost">Delete</button>
+      </div>
+    </div>
+    <div class="list-row">
+      <span class="ic">IMG</span>
+      <div>
+        <div class="nm">board-photo-2024-10-04.jpg</div>
+        <div class="sub">840 KB</div>
+      </div>
+      <div class="right">
+        <span class="badge b-blue"><span class="dot"></span>Extracting</span>
+      </div>
+    </div>
+    <div class="list-row">
+      <span class="ic">DOC</span>
+      <div>
+        <div class="nm">syllabus-fall-2024.docx</div>
+        <div class="sub">52 KB · scanned, OCR failed</div>
+      </div>
+      <div class="right">
+        <span class="badge b-red"><span class="dot"></span>Failed</span>
+        <button class="btn btn-sm">Retry</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Dropzone -->
+<section class="sg">
+  <p class="eyebrow">10 — Dropzone</p>
+  <h2 class="display">Drop course materials.</h2>
+  <hr class="rule-h">
+  <div class="dropzone" style="margin-top:18px">
+    <div class="ic">↑</div>
+    <h4>Drop course materials here</h4>
+    <p>PDFs, slides, images, DOCX, text — anything you have.</p>
+    <button class="btn btn-pri">Choose files</button>
+  </div>
+</section>
+
+<!-- Segmented + empty -->
+<section class="sg">
+  <p class="eyebrow">11 — Segmented control & empty state</p>
+  <h2 class="display">Toolbars.</h2>
+  <hr class="rule-h">
+  <div style="margin-top:18px;display:flex;gap:16px;flex-wrap:wrap;align-items:center">
+    <div class="seg">
+      <button class="on">Mixed</button>
+      <button>Problem</button>
+      <button>Concept check</button>
+      <button>Walkthrough</button>
+    </div>
+  </div>
+  <div class="empty" style="margin-top:18px">
+    <div class="ic">◇</div>
+    <h4>Nothing generated yet</h4>
+    <p>Hit the button above to pull your first grounded practice item.</p>
+    <button class="btn btn-pri">Generate first problem</button>
+  </div>
+</section>
+
+<!-- Table -->
+<section class="sg">
+  <p class="eyebrow">12 — Table</p>
+  <h2 class="display">Dense comparisons.</h2>
+  <hr class="rule-h">
+  <table class="t" style="margin-top:18px">
+    <tr><th>Plan</th><th>Files</th><th>Extracted</th><th>Generated</th><th>Updated</th></tr>
+    <tr><td><b>MATH 13</b> Multivariable Calculus</td><td>12</td><td>1,284</td><td>34</td><td>Oct 9</td></tr>
+    <tr class="hi"><td><b>COSC 50</b> Software Design</td><td>8</td><td>642</td><td>11</td><td>Oct 7</td></tr>
+    <tr><td><b>GOVT 10</b> Comparative Politics</td><td>5</td><td>301</td><td>2</td><td>Oct 2</td></tr>
+  </table>
+</section>
+
+<footer><div class="wrap">Style guide · reference the components here before changing any UI. Open the pages and diff against this file.</div></footer>
+
+</div>
+</body>
+</html>

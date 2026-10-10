@@ -7,7 +7,7 @@ export function Page({
 }: React.HTMLAttributes<HTMLDivElement>) {
   return (
     <div
-      className={cn("max-w-6xl mx-auto px-6 py-10", className)}
+      className={cn("max-w-5xl mx-auto px-6 py-10", className)}
       {...rest}
     >
       {children}
@@ -27,23 +27,21 @@ export function PageHeader({
   actions?: React.ReactNode;
 }) {
   return (
-    <div className="flex items-end justify-between gap-6 mb-8">
-      <div>
-        {eyebrow && (
-          <p className="text-xs tracking-[0.2em] uppercase text-ink-400 mb-2">
-            {eyebrow}
-          </p>
-        )}
-        <h1 className="font-serif text-3xl md:text-4xl text-ink-900 text-balance">
-          {title}
-        </h1>
-        {description && (
-          <p className="text-ink-500 mt-2 max-w-xl text-pretty">
-            {description}
-          </p>
-        )}
+    <div className="pb-6 mb-8 border-b border-ink">
+      <div className="flex items-end justify-between gap-6 flex-wrap">
+        <div>
+          {eyebrow && <p className="eyebrow mb-2">{eyebrow}</p>}
+          <h1 className="font-head font-bold text-4xl md:text-5xl leading-[1] text-balance">
+            {title}
+          </h1>
+          {description && (
+            <p className="text-ink2 mt-3 max-w-xl text-pretty text-[1.02rem]">
+              {description}
+            </p>
+          )}
+        </div>
+        {actions && <div className="flex items-center gap-2">{actions}</div>}
       </div>
-      {actions && <div className="flex items-center gap-2">{actions}</div>}
     </div>
   );
 }

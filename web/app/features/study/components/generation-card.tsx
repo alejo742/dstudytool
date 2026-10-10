@@ -10,30 +10,28 @@ export function GenerationCard({ generation }: { generation: Generation }) {
       animate={{ opacity: 1, y: 0 }}
       exit={{ opacity: 0 }}
       transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
-      className="bg-white border border-ink-200/70 rounded-xl p-7"
+      className="bg-paper2 border-[1.5px] border-ink"
     >
-      <header className="flex items-center justify-between mb-4">
+      <header className="flex items-center justify-between px-5 py-2 border-b border-ink bg-paper">
         <Badge tone="accent">{generation.kind}</Badge>
-        <span className="text-xs text-ink-400 font-mono">
+        <span className="text-xs text-ink3 font-mono">
           {new Date(generation.created_at).toLocaleTimeString([], {
             hour: "numeric",
             minute: "2-digit",
           })}
         </span>
       </header>
-      <div className="prose prose-sm max-w-none text-ink-900 whitespace-pre-wrap font-sans leading-relaxed text-pretty">
+      <div className="px-6 py-5 text-ink whitespace-pre-wrap leading-relaxed text-pretty">
         {generation.content}
       </div>
       {generation.sources.length > 0 && (
-        <footer className="mt-5 pt-4 border-t border-ink-100">
-          <p className="text-xs tracking-wider uppercase text-ink-400 mb-2">
-            Grounded in
-          </p>
+        <footer className="px-5 py-3 border-t border-rule bg-paper">
+          <p className="eyebrow text-[11px] mb-2">Grounded in</p>
           <div className="flex flex-wrap gap-1.5">
             {generation.sources.map((s, i) => (
               <span
                 key={i}
-                className="text-xs text-ink-500 bg-ink-100 px-2 py-0.5 rounded"
+                className="text-xs text-ink2 bg-paper2 border border-rule px-2 py-0.5 font-mono"
               >
                 {s}
               </span>

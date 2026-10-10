@@ -23,7 +23,7 @@ export default function ProtectedLayout() {
 function LoadingScreen() {
   return (
     <div className="min-h-screen flex items-center justify-center">
-      <div className="w-6 h-6 rounded-full border-2 border-ink-200 border-t-ink-900 animate-spin" />
+      <div className="w-6 h-6 border-2 border-rule border-t-ink animate-spin" />
     </div>
   );
 }

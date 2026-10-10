@@ -35,10 +35,8 @@ export function Dropzone({ onFiles, disabled, accept }: DropzoneProps) {
         handle(e.dataTransfer.files);
       }}
       className={cn(
-        "relative border border-dashed rounded-xl p-10 text-center transition",
-        dragging
-          ? "border-ink-900 bg-ink-100/50"
-          : "border-ink-200 hover:border-ink-300 bg-ink-50/60",
+        "relative border-[1.5px] border-dashed p-10 text-center transition bg-grid-sm",
+        dragging ? "border-blue bg-blue-wash" : "border-ink hover:bg-hl-wash/40",
         disabled && "opacity-50 pointer-events-none",
       )}
     >
@@ -54,22 +52,22 @@ export function Dropzone({ onFiles, disabled, accept }: DropzoneProps) {
       <motion.div
         animate={{ scale: dragging ? 1.05 : 1 }}
         transition={{ type: "spring", stiffness: 300, damping: 20 }}
-        className="mx-auto w-12 h-12 rounded-md bg-white border border-ink-200 flex items-center justify-center text-ink-500 mb-4"
+        className="mx-auto w-12 h-12 bg-paper2 border-[1.5px] border-ink flex items-center justify-center text-ink mb-4"
       >
         <UploadIcon size={18} />
       </motion.div>
 
-      <p className="font-serif text-xl text-ink-900">
+      <p className="font-head font-bold text-2xl text-ink leading-none">
         Drop course materials here
       </p>
-      <p className="text-sm text-ink-500 mt-1">
+      <p className="text-ink2 mt-2">
         PDFs, slides, images, DOCX, text — anything you have.
       </p>
 
       <button
         type="button"
         onClick={() => inputRef.current?.click()}
-        className="mt-6 inline-flex items-center gap-2 px-4 h-10 rounded-md bg-ink-900 text-ink-50 text-sm hover:bg-ink-800 transition"
+        className="mt-6 btn btn-pri"
       >
         Choose files
       </button>

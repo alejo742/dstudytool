@@ -7,7 +7,6 @@ import { plansApi } from "~/features/plans/services/plans-api";
 import { PlanCard } from "~/features/plans/components/plan-card";
 import { CreatePlanInline } from "~/features/plans/components/create-plan-inline";
 import type { Plan } from "~/shared/types/domain";
-import { toast } from "sonner";
 
 export function meta() {
   return [{ title: "Plans · Study tool" }];
@@ -55,11 +54,12 @@ export default function PlansListRoute() {
       )}
 
       {error && (
-        <div className="p-4 rounded-md border border-red-100 bg-red-50 text-sm text-red-700 mb-6">
+        <div className="callout callout-red mb-6">
+          <strong className="font-head mr-1">Error.</strong>
           {error}{" "}
           <button
             onClick={load}
-            className="underline underline-offset-2 ml-1"
+            className="underline underline-offset-2 ml-1 text-ink font-semibold"
           >
             Try again
           </button>
@@ -68,7 +68,7 @@ export default function PlansListRoute() {
 
       {plans && plans.length === 0 && (
         <EmptyState
-          icon={<BookOpen size={28} />}
+          icon={<BookOpen size={22} />}
           title="No plans yet"
           description="Start one for a course you're taking. You can upload materials in any format next."
           action={<CreatePlanInline onCreated={onCreated} />}

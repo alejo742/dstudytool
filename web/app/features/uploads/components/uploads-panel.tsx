@@ -104,20 +104,20 @@ export function UploadsPanel({
       )}
 
       {uploads && (uploads.length > 0 || uploadingNames.length > 0) && (
-        <div className="bg-white border border-ink-200/70 rounded-lg overflow-hidden">
+        <div className="bg-paper2 border-[1.5px] border-ink">
           {uploadingNames.map((name) => (
             <div
               key={`uploading-${name}`}
-              className="flex items-center gap-3 px-4 py-3 border-b border-ink-100 last:border-b-0 bg-accent-50/30"
+              className="flex items-center gap-3 px-4 py-3 border-b border-rule last:border-b-0 bg-blue-wash/40"
             >
-              <div className="w-8 h-8 rounded-md bg-accent-100 text-accent-700 flex items-center justify-center">
-                <span className="w-3 h-3 rounded-full border-2 border-accent-300 border-t-accent-700 animate-spin" />
+              <div className="w-9 h-9 bg-blue-wash border border-blue text-blue flex items-center justify-center">
+                <span className="w-3 h-3 border-2 border-blue/30 border-t-blue animate-spin" />
               </div>
               <div className="flex-1 min-w-0">
-                <span className="truncate text-sm font-medium text-ink-900 block">
+                <span className="truncate text-sm font-semibold text-ink block">
                   {name}
                 </span>
-                <p className="text-xs text-ink-500 mt-0.5">Uploading…</p>
+                <p className="text-xs text-ink2 mt-0.5 font-head">Uploading…</p>
               </div>
             </div>
           ))}

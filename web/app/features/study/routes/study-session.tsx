@@ -59,23 +59,23 @@ export default function StudySessionRoute() {
 
   return (
     <Page className="max-w-4xl">
-      <div className="flex items-center justify-between mb-6">
+      <div className="flex items-center justify-between mb-6 flex-wrap gap-3">
         <Link
           to={`/plans/${planId}`}
-          className="inline-flex items-center gap-1 text-xs text-ink-500 hover:text-ink-900 transition"
+          className="inline-flex items-center gap-1 font-head font-semibold text-sm text-ink2 hover:text-ink no-underline"
         >
-          <ArrowLeft size={12} /> Back to plan
+          <ArrowLeft size={14} /> Back to plan
         </Link>
-        <div className="flex items-center gap-1 p-1 bg-ink-100 rounded-md">
+        <div className="flex items-center gap-0 border-[1.5px] border-ink">
           {KINDS.map((k) => (
             <button
               key={k.value}
               onClick={() => setKind(k.value)}
               className={cn(
-                "px-3 h-7 text-xs rounded transition",
+                "px-3 h-8 font-head font-semibold text-sm border-r border-ink last:border-r-0 transition",
                 kind === k.value
-                  ? "bg-white text-ink-900 shadow-sm"
-                  : "text-ink-500 hover:text-ink-900",
+                  ? "bg-ink text-paper"
+                  : "bg-paper2 text-ink2 hover:bg-hl-wash hover:text-ink",
               )}
             >
               {k.label}
@@ -84,14 +84,18 @@ export default function StudySessionRoute() {
         </div>
       </div>
 
-      <header className="mb-8">
-        <h1 className="font-serif text-4xl text-balance">Study session</h1>
-        <p className="text-ink-500 mt-2 text-pretty">
-          Each request pulls from the material you uploaded. No two generations repeat.
+      <header className="mb-8 pb-6 border-b border-ink">
+        <p className="eyebrow mb-2">Study session</p>
+        <h1 className="font-head font-bold text-5xl text-balance leading-[1]">
+          One at a time, from your material.
+        </h1>
+        <p className="text-ink2 mt-3 text-pretty max-w-xl">
+          Each request pulls from the material you uploaded. No two generations
+          repeat.
         </p>
       </header>
 
-      <div className="flex items-center gap-3 mb-10">
+      <div className="flex items-center gap-3 mb-10 flex-wrap">
         <Button
           size="lg"
           onClick={generate}
@@ -102,7 +106,7 @@ export default function StudySessionRoute() {
         </Button>
         {items && items.length > 0 && (
           <Button
-            variant="ghost"
+            variant="secondary"
             onClick={generate}
             loading={loading}
             iconLeft={<RotateCcw size={14} />}
@@ -115,8 +119,8 @@ export default function StudySessionRoute() {
       <div ref={scrollRef} className="flex flex-col gap-6">
         {items === null && (
           <>
-            <Skeleton className="h-40 rounded-xl" />
-            <Skeleton className="h-32 rounded-xl" />
+            <Skeleton className="h-40" />
+            <Skeleton className="h-32" />
           </>
         )}
 
@@ -124,10 +128,12 @@ export default function StudySessionRoute() {
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            className="text-center py-16 border border-dashed border-ink-200 rounded-xl"
+            className="text-center py-16 border-[1.5px] border-dashed border-ink bg-paper2"
           >
-            <p className="font-serif text-xl text-ink-900">Nothing generated yet</p>
-            <p className="text-sm text-ink-500 mt-2 max-w-sm mx-auto">
+            <p className="font-head font-bold text-2xl text-ink leading-none">
+              Nothing generated yet
+            </p>
+            <p className="text-ink2 mt-3 max-w-sm mx-auto">
               Hit the button above to pull your first grounded practice item.
             </p>
           </motion.div>

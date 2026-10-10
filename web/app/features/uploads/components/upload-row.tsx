@@ -57,14 +57,14 @@ export function UploadRow({
       initial={{ opacity: 0, y: 4 }}
       animate={{ opacity: 1, y: 0 }}
       exit={{ opacity: 0 }}
-      className="group flex items-center gap-3 px-4 py-3 bg-white border-b border-ink-100 last:border-b-0 hover:bg-ink-50 transition"
+      className="group flex items-center gap-3 px-4 py-3 bg-paper2 border-b border-rule last:border-b-0 hover:bg-hl-wash/40 transition"
     >
-      <div className="w-8 h-8 rounded-md bg-ink-100 text-ink-500 flex items-center justify-center">
+      <div className="w-9 h-9 bg-paper border border-rule text-ink2 flex items-center justify-center shrink-0">
         {iconFor(upload.mime_type)}
       </div>
       <div className="min-w-0 flex-1">
         <div className="flex items-center gap-2 min-w-0">
-          <span className="truncate text-sm font-medium text-ink-900">
+          <span className="truncate text-sm font-semibold text-ink">
             {upload.filename}
           </span>
           <Badge tone={statusTone(upload.status)}>
@@ -72,11 +72,11 @@ export function UploadRow({
             {statusLabel(upload.status)}
           </Badge>
         </div>
-        <p className="text-xs text-ink-500 mt-0.5">
+        <p className="text-xs text-ink3 mt-0.5 font-mono">
           {fmtBytes(upload.size_bytes)}
           {upload.pages ? ` · ${upload.pages} pages` : ""}
           {upload.chars_extracted
-            ? ` · ${upload.chars_extracted.toLocaleString()} chars extracted`
+            ? ` · ${upload.chars_extracted.toLocaleString()} chars`
             : ""}
           {upload.error ? ` · ${upload.error}` : ""}
         </p>
@@ -89,7 +89,7 @@ export function UploadRow({
         {upload.status === "failed" && (
           <button
             onClick={onReprocess}
-            className="w-8 h-8 inline-flex items-center justify-center rounded-md text-ink-500 hover:text-ink-900 hover:bg-ink-100"
+            className="w-8 h-8 inline-flex items-center justify-center border-[1.5px] border-transparent text-ink2 hover:text-ink hover:border-ink hover:bg-hl-wash"
             aria-label="Retry extraction"
             title="Retry"
           >
@@ -98,7 +98,7 @@ export function UploadRow({
         )}
         <button
           onClick={onDelete}
-          className="w-8 h-8 inline-flex items-center justify-center rounded-md text-ink-500 hover:text-red-600 hover:bg-red-50"
+          className="w-8 h-8 inline-flex items-center justify-center border-[1.5px] border-transparent text-ink2 hover:text-red hover:border-red hover:bg-red-wash"
           aria-label="Delete"
           title="Delete"
         >

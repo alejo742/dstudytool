@@ -58,8 +58,8 @@ export default function AuthCallbackRoute() {
         transition={{ duration: 0.4 }}
         className="text-center"
       >
-        <div className="mx-auto mb-6 w-10 h-10 rounded-full border-2 border-ink-200 border-t-ink-900 animate-spin" />
-        <p className="text-sm text-ink-500">{message}</p>
+        <div className="mx-auto mb-6 w-10 h-10 border-2 border-rule border-t-ink animate-spin" />
+        <p className="font-head text-ink2">{message}</p>
       </motion.div>
     </main>
   );

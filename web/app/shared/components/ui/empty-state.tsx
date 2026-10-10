@@ -16,18 +16,18 @@ export function EmptyState({
   return (
     <div
       className={cn(
-        "border border-dashed border-ink-200 rounded-xl p-10 text-center",
+        "border-[1.5px] border-dashed border-ink bg-paper2 p-10 text-center",
         className,
       )}
     >
       {icon && (
-        <div className="mx-auto mb-4 w-10 h-10 flex items-center justify-center text-ink-400">
+        <div className="mx-auto mb-4 w-12 h-12 flex items-center justify-center border-[1.5px] border-ink bg-paper text-ink">
           {icon}
         </div>
       )}
-      <h3 className="font-serif text-xl text-ink-900">{title}</h3>
+      <h3 className="font-head font-bold text-2xl text-ink leading-none">{title}</h3>
       {description && (
-        <p className="text-sm text-ink-500 mt-2 max-w-sm mx-auto text-pretty">
+        <p className="text-ink2 mt-3 max-w-sm mx-auto text-pretty">
           {description}
         </p>
       )}

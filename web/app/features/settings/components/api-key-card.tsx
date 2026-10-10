@@ -67,17 +67,17 @@ export function ApiKeyCard() {
     <motion.section
       initial={{ opacity: 0, y: 6 }}
       animate={{ opacity: 1, y: 0 }}
-      className="bg-white border border-ink-200/70 rounded-xl p-7"
+      className="bg-paper2 border-[1.5px] border-ink"
     >
-      <header className="flex items-start justify-between gap-6 mb-6">
+      <header className="flex items-start justify-between gap-6 p-5 border-b border-ink flex-wrap">
         <div>
-          <div className="flex items-center gap-2 mb-2">
-            <Key size={16} className="text-ink-500" />
-            <h2 className="font-serif text-2xl text-ink-900">
+          <div className="flex items-center gap-2 mb-1">
+            <Key size={16} className="text-ink2" />
+            <h2 className="font-head font-bold text-2xl text-ink leading-none">
               Dartmouth Chat API key
             </h2>
           </div>
-          <p className="text-sm text-ink-500 max-w-md text-pretty">
+          <p className="text-ink2 max-w-md text-pretty mt-2">
             Required to generate practice material. Issued at your Dartmouth AI
             portal — your key never leaves this account.
           </p>
@@ -90,66 +90,68 @@ export function ApiKeyCard() {
         )}
       </header>
 
-      {status?.configured && (
-        <div className="mb-6 p-4 rounded-lg bg-ink-50 border border-ink-200/70 flex items-center justify-between">
-          <div className="min-w-0">
-            <p className="text-xs text-ink-500 mb-1">Current key</p>
-            <p className="font-mono text-sm text-ink-900 truncate">
-              {status.masked_hint ?? "sk-••••••••"}
-            </p>
-          </div>
-          <div className="flex items-center gap-2">
-            <Button
-              size="sm"
-              variant="secondary"
-              onClick={verify}
-              loading={verifying}
-              iconLeft={<Check size={14} />}
-            >
-              Verify
-            </Button>
-            <Button
-              size="sm"
-              variant="ghost"
-              onClick={remove}
-              iconLeft={<Trash2 size={14} />}
-            >
-              Remove
-            </Button>
-          </div>
-        </div>
-      )}
-
-      <Field
-        label={status?.configured ? "Replace with a new key" : "Paste your key"}
-        hint="Starts with sk- or similar."
-      >
-        {({ id }) => (
-          <div className="flex gap-2">
-            <div className="relative flex-1">
-              <Input
-                id={id}
-                type={showKey ? "text" : "password"}
-                placeholder="sk-••••••••••••••••••••••••••••"
-                value={key}
-                onChange={(e) => setKey(e.target.value)}
-                className="font-mono pr-10"
-              />
-              <button
-                type="button"
-                onClick={() => setShowKey((v) => !v)}
-                className="absolute right-2 top-1/2 -translate-y-1/2 w-7 h-7 inline-flex items-center justify-center rounded text-ink-400 hover:text-ink-900 hover:bg-ink-100"
-                aria-label={showKey ? "Hide" : "Show"}
-              >
-                {showKey ? <EyeOff size={14} /> : <Eye size={14} />}
-              </button>
+      <div className="p-5">
+        {status?.configured && (
+          <div className="mb-5 p-4 bg-paper border border-rule flex items-center justify-between flex-wrap gap-3">
+            <div className="min-w-0">
+              <p className="eyebrow text-xs mb-1">Current key</p>
+              <p className="font-mono text-sm text-ink truncate">
+                {status.masked_hint ?? "sk-••••••••"}
+              </p>
             </div>
-            <Button onClick={save} loading={saving} disabled={!key.trim()}>
-              Save
-            </Button>
+            <div className="flex items-center gap-2">
+              <Button
+                size="sm"
+                variant="secondary"
+                onClick={verify}
+                loading={verifying}
+                iconLeft={<Check size={14} />}
+              >
+                Verify
+              </Button>
+              <Button
+                size="sm"
+                variant="danger"
+                onClick={remove}
+                iconLeft={<Trash2 size={14} />}
+              >
+                Remove
+              </Button>
+            </div>
           </div>
         )}
-      </Field>
+
+        <Field
+          label={status?.configured ? "Replace with a new key" : "Paste your key"}
+          hint="Starts with sk- or similar."
+        >
+          {({ id }) => (
+            <div className="flex gap-2">
+              <div className="relative flex-1">
+                <Input
+                  id={id}
+                  type={showKey ? "text" : "password"}
+                  placeholder="sk-••••••••••••••••••••••••••••"
+                  value={key}
+                  onChange={(e) => setKey(e.target.value)}
+                  className="font-mono pr-10"
+                />
+                <button
+                  type="button"
+                  onClick={() => setShowKey((v) => !v)}
+                  className="absolute right-1 top-1/2 -translate-y-1/2 w-8 h-8 inline-flex items-center justify-center text-ink3 hover:text-ink hover:bg-hl-wash"
+                  aria-label={showKey ? "Hide" : "Show"}
+                >
+                  {showKey ? <EyeOff size={14} /> : <Eye size={14} />}
+                </button>
+              </div>
+              <Button onClick={save} loading={saving} disabled={!key.trim()}>
+                Save
+              </Button>
+            </div>
+          )}
+        </Field>
+      </div>
     </motion.section>
   );
 }
