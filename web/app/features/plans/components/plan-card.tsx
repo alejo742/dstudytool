@@ -1,9 +1,25 @@
 import { Link } from "react-router";
 import { motion } from "motion/react";
-import { FileText, Sparkles } from "lucide-react";
-import type { Plan } from "~/shared/types/domain";
+import { FileText, Milestone } from "lucide-react";
+import type { NextAction, Plan } from "~/shared/types/domain";
 
-export function PlanCard({ plan, index }: { plan: Plan; index: number }) {
+export function PlanCard({
+  plan,
+  nextAction,
+  index,
+}: {
+  plan: Plan;
+  nextAction: NextAction | null;
+  index: number;
+}) {
+  const progressLabel = buildProgressLabel(nextAction);
+  const pct =
+    nextAction && nextAction.modules_total > 0
+      ? Math.round(
+          (nextAction.modules_completed / nextAction.modules_total) * 100,
+        )
+      : null;
+
   return (
     <motion.div
       initial={{ opacity: 0, y: 10 }}
@@ -30,12 +46,25 @@ export function PlanCard({ plan, index }: { plan: Plan; index: number }) {
           </div>
           <ArrowGlyph />
         </div>
-        <div className="mt-5 pt-3 border-t border-rule flex items-center gap-5 text-xs text-ink2 font-head font-semibold">
-          <Stat icon={<FileText size={12} />} value={plan.upload_count} label="files" />
+
+        {pct !== null && (
+          <div className="mt-4">
+            <div className="h-1.5 bg-paper border border-rule">
+              <div className="h-full bg-ink" style={{ width: `${pct}%` }} />
+            </div>
+          </div>
+        )}
+
+        <div className="mt-4 pt-3 border-t border-rule flex items-center gap-5 text-xs text-ink2 font-head font-semibold">
           <Stat
-            icon={<Sparkles size={12} />}
-            value={plan.generation_count}
-            label="generated"
+            icon={<FileText size={12} />}
+            value={plan.upload_count}
+            label="files"
+          />
+          <Stat
+            icon={<Milestone size={12} />}
+            value={progressLabel}
+            label="progress"
           />
           <span className="ml-auto text-ink3 font-mono text-[11px]">
             {new Date(plan.updated_at).toLocaleDateString(undefined, {
@@ -49,19 +78,28 @@ export function PlanCard({ plan, index }: { plan: Plan; index: number }) {
   );
 }
 
+function buildProgressLabel(n: NextAction | null): string {
+  if (!n) return "…";
+  if (n.modules_total === 0) {
+    if (n.kind === "upload_prompt") return "no material";
+    return "not started";
+  }
+  return `${n.modules_completed}/${n.modules_total}`;
+}
+
 function Stat({
   icon,
   value,
   label,
 }: {
   icon: React.ReactNode;
-  value: number;
+  value: number | string;
   label: string;
 }) {
   return (
     <span className="inline-flex items-center gap-1.5">
       {icon}
-      <span className="text-ink font-bold">{value}</span>
+      <span className="text-ink font-bold tabular-nums">{value}</span>
       <span className="text-ink3 uppercase tracking-wide">{label}</span>
     </span>
   );

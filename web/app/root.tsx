@@ -37,7 +37,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
         <Meta />
         <Links />
       </head>
-      <body className="min-h-full antialiased bg-paper text-ink">
+      <body className="min-h-full antialiased bg-paper text-ink" suppressHydrationWarning>
         {children}
         <Toaster position="bottom-right" theme="light" closeButton />
         <ScrollRestoration />

@@ -5,8 +5,8 @@ from typing import List
 from fastapi import APIRouter, HTTPException, status
 
 from app.core.auth import CurrentUser, UserDep
-from app.features.plans import repository
-from app.features.plans.schemas import Plan, PlanCreate
+from app.features.plans import next_action, repository
+from app.features.plans.schemas import NextAction, Plan, PlanCreate
 
 router = APIRouter(prefix="/plans", tags=["plans"])
 
@@ -40,3 +40,11 @@ def delete_plan(plan_id: str, user: CurrentUser = UserDep) -> None:
     ok = repository.delete(user.id, plan_id)
     if not ok:
         raise HTTPException(status.HTTP_404_NOT_FOUND, detail="Plan not found")
+
+
+@router.get("/{plan_id}/next", response_model=NextAction)
+def get_next_action(plan_id: str, user: CurrentUser = UserDep) -> NextAction:
+    plan = repository.get_for_user(user.id, plan_id)
+    if not plan:
+        raise HTTPException(status.HTTP_404_NOT_FOUND, detail="Plan not found")
+    return next_action.resolve_next_action(user_id=user.id, plan_id=plan_id)

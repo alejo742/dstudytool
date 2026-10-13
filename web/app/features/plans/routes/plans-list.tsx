@@ -6,7 +6,7 @@ import { Skeleton } from "~/shared/components/ui/skeleton";
 import { plansApi } from "~/features/plans/services/plans-api";
 import { PlanCard } from "~/features/plans/components/plan-card";
 import { CreatePlanInline } from "~/features/plans/components/create-plan-inline";
-import type { Plan } from "~/shared/types/domain";
+import type { NextAction, Plan } from "~/shared/types/domain";
 
 export function meta() {
   return [{ title: "Plans · Study tool" }];
@@ -14,6 +14,7 @@ export function meta() {
 
 export default function PlansListRoute() {
   const [plans, setPlans] = useState<Plan[] | null>(null);
+  const [nextByPlan, setNextByPlan] = useState<Record<string, NextAction>>({});
   const [error, setError] = useState<string | null>(null);
 
   const load = async () => {
@@ -21,6 +22,16 @@ export default function PlansListRoute() {
       setError(null);
       const items = await plansApi.list();
       setPlans(items);
+      // Fetch next-action in parallel for progress badges. Any failure is
+      // non-fatal; the card falls back to "…".
+      const results = await Promise.allSettled(
+        items.map((p) => plansApi.next(p.id).then((n) => [p.id, n] as const)),
+      );
+      const map: Record<string, NextAction> = {};
+      for (const r of results) {
+        if (r.status === "fulfilled") map[r.value[0]] = r.value[1];
+      }
+      setNextByPlan(map);
     } catch (e) {
       setError(e instanceof Error ? e.message : "Could not load plans");
       setPlans([]);
@@ -78,7 +89,12 @@ export default function PlansListRoute() {
       {plans && plans.length > 0 && (
         <div className="grid md:grid-cols-2 gap-4">
           {plans.map((p, i) => (
-            <PlanCard key={p.id} plan={p} index={i} />
+            <PlanCard
+              key={p.id}
+              plan={p}
+              nextAction={nextByPlan[p.id] ?? null}
+              index={i}
+            />
           ))}
         </div>
       )}

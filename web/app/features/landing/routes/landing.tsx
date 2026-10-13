@@ -1,6 +1,6 @@
-import { Link } from "react-router";
+import { Link, useNavigate } from "react-router";
 import { motion } from "motion/react";
-import { Suspense, lazy } from "react";
+import { Suspense, lazy, useEffect } from "react";
 import { ArrowRight, FileText, Infinity as InfinityIcon, Sparkles } from "lucide-react";
 import { useAuth } from "~/features/auth/hooks/auth-provider";
 
@@ -23,7 +23,12 @@ export function meta() {
 
 export default function LandingRoute() {
   const { status } = useAuth();
+  const navigate = useNavigate();
   const ctaHref = status === "signed-in" ? "/plans" : "/login";
+
+  useEffect(() => {
+    if (status === "signed-in") navigate("/plans", { replace: true });
+  }, [status, navigate]);
 
   return (
     <main className="min-h-screen">

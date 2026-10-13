@@ -84,6 +84,24 @@ def update_status(
     client.table(TABLE).update(patch).eq("id", upload_id).execute()
 
 
+def set_labels(
+    upload_id: str,
+    *,
+    content_type: str,
+    course_type: str,
+) -> None:
+    from datetime import datetime, timezone
+
+    client = service_client()
+    client.table(TABLE).update(
+        {
+            "content_type": content_type,
+            "course_type": course_type,
+            "labels_generated_at": datetime.now(timezone.utc).isoformat(),
+        }
+    ).eq("id", upload_id).execute()
+
+
 def delete(user_id: str, upload_id: str) -> Optional[dict]:
     client = service_client()
     row = get(user_id, upload_id)

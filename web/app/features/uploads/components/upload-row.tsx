@@ -1,5 +1,11 @@
 import { motion } from "motion/react";
-import { FileText, Image as ImageIcon, FileType2, Trash2, RefreshCw } from "lucide-react";
+import {
+  FileText,
+  Image as ImageIcon,
+  FileType2,
+  Trash2,
+  RefreshCw,
+} from "lucide-react";
 import type { Upload } from "~/shared/types/domain";
 import { Badge, StatusDot } from "~/shared/components/ui/badge";
 import { cn } from "~/shared/lib/cn";
@@ -63,7 +69,7 @@ export function UploadRow({
         {iconFor(upload.mime_type)}
       </div>
       <div className="min-w-0 flex-1">
-        <div className="flex items-center gap-2 min-w-0">
+        <div className="flex items-center gap-2 min-w-0 flex-wrap">
           <span className="truncate text-sm font-semibold text-ink">
             {upload.filename}
           </span>
@@ -71,6 +77,22 @@ export function UploadRow({
             <StatusDot tone={statusTone(upload.status)} />
             {statusLabel(upload.status)}
           </Badge>
+          {upload.content_type && (
+            <span
+              className="text-[10px] font-head font-semibold uppercase tracking-wide text-ink3 bg-paper border border-rule px-1.5"
+              title="Classified content"
+            >
+              {upload.content_type}
+            </span>
+          )}
+          {upload.course_type && upload.course_type !== "other" && (
+            <span
+              className="text-[10px] font-head font-semibold uppercase tracking-wide text-ink3 bg-paper border border-rule px-1.5"
+              title="Course type"
+            >
+              {upload.course_type}
+            </span>
+          )}
         </div>
         <p className="text-xs text-ink3 mt-0.5 font-mono">
           {fmtBytes(upload.size_bytes)}

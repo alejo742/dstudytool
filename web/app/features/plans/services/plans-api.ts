@@ -1,5 +1,5 @@
 import { api } from "~/shared/lib/api";
-import type { Plan } from "~/shared/types/domain";
+import type { NextAction, Plan } from "~/shared/types/domain";
 
 export const plansApi = {
   list: () => api<Plan[]>("/plans"),
@@ -8,4 +8,5 @@ export const plansApi = {
     api<Plan>("/plans", { method: "POST", json: input }),
   remove: (id: string) =>
     api<void>(`/plans/${id}`, { method: "DELETE" }),
+  next: (id: string) => api<NextAction>(`/plans/${id}/next`),
 };

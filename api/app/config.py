@@ -31,6 +31,15 @@ class Settings(BaseSettings):
     dartmouth_default_model: str = Field(
         default="openai.gpt-4.1-mini-2025-04-14",
     )
+    # Journey mode uses the newest Claude Sonnet available via Dartmouth Chat —
+    # strong reasoning for math-style material. Override via JOURNEY_MODEL.
+    journey_model: str = Field(
+        default="anthropic.claude-sonnet-5-5",
+    )
+    # Upload labeling runs once per file at ingest — small / cheap model is fine.
+    labeling_model: str = Field(
+        default="anthropic.claude-haiku-5-5",
+    )
 
     # Access restriction
     allowed_email_domain: str = Field(default="dartmouth.edu")

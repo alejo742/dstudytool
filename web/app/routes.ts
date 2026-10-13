@@ -13,10 +13,7 @@ export default [
   layout("features/auth/routes/protected-layout.tsx", [
     route("plans", "features/plans/routes/plans-list.tsx"),
     route("plans/:planId", "features/plans/routes/plan-detail.tsx"),
-    route(
-      "plans/:planId/study",
-      "features/study/routes/study-session.tsx",
-    ),
+    route("journeys/:journeyId", "features/journeys/routes/journey-by-id.tsx"),
     route("settings", "features/settings/routes/settings.tsx"),
   ]),
 ] satisfies RouteConfig;

@@ -1,9 +1,16 @@
 from __future__ import annotations
 
 from datetime import datetime
-from typing import Optional
+from typing import Literal, Optional
 
 from pydantic import BaseModel, Field
+
+NextActionKind = Literal[
+    "continue_journey",
+    "start_journey",
+    "upload_prompt",
+    "all_done",
+]
 
 
 class PlanCreate(BaseModel):
@@ -23,3 +30,15 @@ class Plan(BaseModel):
     upload_count: int = 0
     extracted_chunk_count: int = 0
     generation_count: int = 0
+
+
+class NextAction(BaseModel):
+    kind: NextActionKind
+    label: str
+    sublabel: Optional[str] = None
+    journey_id: Optional[str] = None
+    module_ordinal: Optional[int] = None
+    upload_id: Optional[str] = None
+    upload_filename: Optional[str] = None
+    modules_completed: int = 0
+    modules_total: int = 0

@@ -44,6 +44,38 @@ def insert_chunks(
     return inserted
 
 
+def list_chunks_for_upload(*, user_id: str, upload_id: str) -> List[dict]:
+    """Return every chunk for an upload, ordered by ordinal. Used by the
+    guided-learning journey outline pass."""
+    client = service_client()
+    res = (
+        client.table(TABLE)
+        .select("id,content,source_label,page,ordinal")
+        .eq("user_id", user_id)
+        .eq("upload_id", upload_id)
+        .order("ordinal", desc=False)
+        .execute()
+    )
+    return [dict(r) for r in (res.data or [])]
+
+
+def get_chunks_by_ids(*, user_id: str, chunk_ids: List[str]) -> List[dict]:
+    """Return specific chunks by id (owner-scoped), preserving stable ordering
+    by ordinal. Used when generating a module's extract from its source chunks."""
+    if not chunk_ids:
+        return []
+    client = service_client()
+    res = (
+        client.table(TABLE)
+        .select("id,content,source_label,page,ordinal")
+        .eq("user_id", user_id)
+        .in_("id", chunk_ids)
+        .order("ordinal", desc=False)
+        .execute()
+    )
+    return [dict(r) for r in (res.data or [])]
+
+
 def sample_for_plan(
     *, user_id: str, plan_id: str, limit: int = 10, exclude_ids: list[str] | None = None
 ) -> List[dict]:

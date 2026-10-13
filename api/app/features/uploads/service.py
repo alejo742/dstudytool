@@ -5,6 +5,7 @@ from pathlib import Path
 
 from app.features.extraction import pipeline as extraction_pipeline
 from app.features.extraction import repository as extraction_repo
+from app.features.labeling import service as labeling_service
 from app.features.uploads import repository as uploads_repo
 
 log = logging.getLogger(__name__)
@@ -49,6 +50,13 @@ def run_extraction(
             inserted,
             sum(len(c.text) for c in chunks),
         )
+
+        # Fire-and-forget AI label. Failures are logged and swallowed so a
+        # labeling miss never flips the upload back to 'failed'.
+        try:
+            labeling_service.label_upload(user_id=user_id, upload_id=upload_id)
+        except Exception as le:  # pragma: no cover
+            log.warning("labeling raised unexpectedly for %s: %s", filename, le)
     except Exception as e:
         log.exception("Extraction failed for %s: %s", filename, e)
         uploads_repo.update_status(upload_id, status="failed", error=str(e)[:400])

@@ -34,7 +34,7 @@ async def save_upload(
     suffix = Path(file.filename or "").suffix.lower()
     unique = f"{uuid.uuid4().hex}{suffix}"
     rel = f"{user_id}/{plan_id}/{unique}"
-    full = _root() / rel
+    full = _plan_dir(user_id, plan_id) / unique
 
     size = 0
     chunk_size = 1024 * 1024

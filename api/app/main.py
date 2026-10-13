@@ -10,8 +10,8 @@ from fastapi.responses import JSONResponse
 from app.config import get_settings
 from app.features.plans.router import router as plans_router
 from app.features.uploads.router import router as uploads_router
-from app.features.generation.router import router as generation_router
 from app.features.api_keys.router import router as api_keys_router
+from app.features.journeys.router import router as journeys_router
 
 logging.basicConfig(
     level=logging.INFO,
@@ -73,5 +73,5 @@ async def unhandled(request, exc):
 
 app.include_router(plans_router)
 app.include_router(uploads_router)
-app.include_router(generation_router)
 app.include_router(api_keys_router)
+app.include_router(journeys_router)
